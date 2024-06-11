@@ -5,8 +5,8 @@
 set -e
 
 # Read the version number and build number from the respective files
-version_number=$(cat internal/version.txt)
-build_number=$(cat internal/version-build.txt)
+version_number=$(< internal/version.txt)
+build_number=$(< internal/version-build.txt)
 
 # Function to validate the version number format x.y.z(-beta.w)
 validate_version_number() {
@@ -49,10 +49,10 @@ done
 git tag -a -s  "v${version_number}" -m "${version_number}"
 
 # Get Current Branch Name
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+branch="$(git rev-parse --abbrev-ref HEAD)"
 
 # if on main, then stash changes and create RC branch
-if [[ "${BRANCH}" = "main" ]]; then
+if [[ "${branch}" = "main" ]]; then
     git stash
     git fetch origin
     git checkout -b rc/"${version_number}"
@@ -62,9 +62,9 @@ fi
 # Add changes and commit/push to branch
 git add .
 git commit -m "Release for ${version_number}"
-git push origin ${BRANCH}
+git push origin ${branch}
 
 # Login with Github CLI
 gh auth login --with-token <<< ${GITHUB_TOKEN} 
 
-gh release create "${version_number}" --title "Release ${version_number}" --notes "${changelog_content}" --repo github.com/1Password/onepassword-sdk-go
+gh release create "${version_number}" --title "Release ${version_number}" --notes "${changelog_content}" --repo github.com/MOmarMiraj/onepassword-sdk-go
