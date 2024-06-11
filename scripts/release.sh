@@ -86,7 +86,6 @@ git push origin ${branch}
 if [ -z "${GITHUB_TOKEN}" ]; then
   echo "GITHUB_TOKEN environment variable is not set."
   exit 1
-
 fi
 
 gh release create "${version_number}" --title "Release ${version_number}" --notes "${changelog_content}" --repo github.com/MOmarMiraj/onepassword-sdk-go
