@@ -52,7 +52,7 @@ git tag -a -s  "v${version_number}" -m "${version_number}"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 # if on main, then stash changes and create RC branch
-if [[ "$BRANCH" = "main" ]]; then
+if [[ "${BRANCH}" = "main" ]]; then
     git stash
     git fetch origin
     git checkout -b rc/"${version_number}"
