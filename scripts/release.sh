@@ -39,5 +39,5 @@ git add .
 git commit -m "Release v${version}"
 git push origin ${branch}
 
-gh release create "v${version}" --title "Release ${version}" --notes "${changelog}" --repo github.com/1Password/onepassword-sdk-go
+gh release create "v${version}" --title "Release ${version}" --notes "${changelog}" --repo github.com/MOmarMiraj/onepassword-sdk-go
 
