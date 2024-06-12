@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Helper script to release the Python SDk
+# Helper script to release the Go SDK
 
 set -e
 
@@ -13,6 +13,12 @@ changelog=$(<internal/changelogs/"${version}"-"${build}")
 if ! command -v gh &> /dev/null; then
 	echo "gh is not installed";\
 	exit 1;\
+fi
+
+# Ensure GITHUB_TOKEN env var is set
+if [ -z "${GITHUB_TOKEN}" ]; then
+  echo "GITHUB_TOKEN environment variable is not set."
+  exit 1
 fi
 
 git tag -a -s  "v${version}" -m "${version}"
@@ -30,13 +36,8 @@ fi
 
 # Add changes and commit/push to branch
 git add .
-git commit -m "Release for ${version}"
+git commit -m "Release v${version}"
 git push origin ${branch}
 
-# Ensure GITHUB_TOKEN env var is set
-if [ -z "${GITHUB_TOKEN}" ]; then
-  echo "GITHUB_TOKEN environment variable is not set."
-  exit 1
-fi
+gh release create "v${version}" --title "Release ${version}" --notes "${changelog}" --repo github.com/1Password/onepassword-sdk-go
 
-gh release create "${version}" --title "Release ${version}" --notes "${changelog}" --repo github.com/MOmarMiraj/onepassword-sdk-go
