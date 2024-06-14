@@ -86,6 +86,11 @@ if [[ "${branch}" = "main" ]]; then
     git stash pop
 fi
 
+# Add changes and commit/push to branch
+git add .
+git commit -S -m "Release v${version}"
+git push --set-upstream origin ${branch}
+
 echo "Release has been prepared..
 Make sure to double check version/build numbers in their appropriate files and
 changelog is correctly filled out.
