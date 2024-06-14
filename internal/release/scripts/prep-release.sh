@@ -64,7 +64,9 @@ update_and_validate_version
 # Update and validate the build number
 update_and_validate_build 
 
-if [[ "$current_build_number" -le "$build" ]]; then
+if [[ "$current_build_number" -ge "$build" ]]; then
+    echo $current_build_number
+    echo $build
     echo "Build version hasn't changed or is lower than current build version. Stopping." >&2
     exit 1
 fi
@@ -77,7 +79,7 @@ while IFS= read -r line; do
     changelog_content+="${line}"$'\n' # Append each line to the variable with a newline character
 done
 
-changelog_file="internal/changelogs/"${version}"-"${build}""
+changelog_file="internal/release/changelogs/"${version}"-"${build}""
 
 # Store the changelog input into a file
 echo "${changelog_content}" >> "${changelog_file}"
