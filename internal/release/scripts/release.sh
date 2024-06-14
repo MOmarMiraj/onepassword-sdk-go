@@ -26,5 +26,5 @@ git tag -a -s  "v${version}" -m "${version}"
 # Push the tag to the branch
 git push origin tag "v${version}"
 
-gh release create "v${version}" --title "Release ${version}" --notes "${changelog}" --repo github.com/1Password/onepassword-sdk-go
+gh release create "v${version}" --title "Release ${version}" --notes "${changelog}" --repo github.com/MOmarMiraj/onepassword-sdk-go
 
