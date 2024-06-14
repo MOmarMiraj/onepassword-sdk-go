@@ -10,7 +10,7 @@ const (
 	SDKLanguage           = "Go"
 	DefaultRequestLibrary = "net/http"
 )
-
+test
 //go:embed release/version-build
 var SDKSemverVersion string
 
