@@ -66,7 +66,7 @@ update_and_validate_build() {
                 return 0
             else
                 echo "Build version hasn't changed or is less than current build version. Stopping." >&2
-                exit 1
+                cleanup
             fi
         else
             echo "Invalid build number format: ${build}"
