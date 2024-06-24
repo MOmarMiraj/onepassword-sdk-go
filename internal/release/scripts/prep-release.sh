@@ -38,7 +38,7 @@ update_and_validate_version() {
         read -p "Enter the version number (format: x.y.z(-beta.w)): " version
         # Validate the version number format
         if [[ "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-beta\.[0-9]+)?$ ]]; then
-            if [["${current_version}" != "${version}" ]]; then        
+            if [[ "${current_version}" != "${version}" ]]; then        
                 # Write the valid version number to the file
                 echo "${version}" > "${version_file}"
                 echo "New version number is: ${version}"
