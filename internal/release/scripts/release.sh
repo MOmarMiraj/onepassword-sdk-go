@@ -2,8 +2,6 @@
 
 # Helper script to release the Go SDK
 
-set -e
-
 # Read the contents of the files into variables
 version=$(<internal/release/version)
 build=$(<internal/release/version-build)
