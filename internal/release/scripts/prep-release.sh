@@ -16,7 +16,8 @@ cleanup() {
     rm -f "${changelog_file}"
     # Revert changes to file if any
     echo "${current_version}" > "${version_file}"
-    echo "${current_build}" > "${build_file}"   
+    echo "${current_build}" > "${build_file}"
+    exit 1   
 }
 
 # Set the trap to call the cleanup function on exit
