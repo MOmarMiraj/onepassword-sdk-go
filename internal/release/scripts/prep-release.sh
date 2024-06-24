@@ -2,7 +2,7 @@
 
 # Helper script to prepare a release for the Go SDK.
 
-# Read the current build number from version-build to make sure the build number has been updated
+# Read current build and version for backup as well as comparison to new build
 current_build=$(< internal/release/version-build)
 current_version=$(< internal/release/version)
 
@@ -12,6 +12,7 @@ build_file="internal/release/version-build"
 # Function to execute upon exit
 cleanup() {
     echo "Performing cleanup tasks..."
+    # Remove changelog file if it exists
     rm -f "${changelog_file}"
     # Revert changes to file if any
     echo "${current_version}" > "${version_file}"
@@ -74,7 +75,7 @@ update_and_validate_build() {
 }
 
 # Ensure that the current working directory is clean
-# enforce_latest_code
+enforce_latest_code
 
 # Update and validate the version number
 update_and_validate_version
