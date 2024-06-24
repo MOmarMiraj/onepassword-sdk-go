@@ -53,6 +53,11 @@ update_and_validate_build() {
             echo "Please enter a build number in the 'Mmmppbb' format."
         fi
     done
+    
+    if (( 10#$current_build_number >= 10#$build )); then
+    echo "Build version hasn't changed or is less than current build version. Stopping." >&2
+    exit 1
+    fi
 }
 
 # Ensure that the current working directory is clean
@@ -63,11 +68,6 @@ update_and_validate_version
 
 # Update and validate the build number
 update_and_validate_build 
-
-if (( 10#$current_build_number >= 10#$build )); then
-    echo "Build version hasn't changed or is less than current build version. Stopping." >&2
-    exit 1
-fi
 
 changelog_file="internal/release/changelogs/"${version}"-"${build}""
 
